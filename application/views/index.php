@@ -92,10 +92,7 @@
                                 <span class="input-group-addon-2"><i class="fas fa-bed"></i></span>
                                 <select class="form-control">
                                     <option data-display="1 Room">1 Room</option>
-                                    <option value="2 Rooms">2 Rooms</option>
-                                    <option value="3 Rooms">3 Rooms</option>
-                                    <option value="4 Rooms">4 Rooms</option>
-                                    <option value="5 Rooms">5 Rooms</option>
+                                    
                                 </select>
                             </div>
                           
@@ -107,8 +104,8 @@
                             <div class="input-group form-group">
                                 <span class="input-group-addon-2"><i class="fas fa-user-alt"></i></span>
                                 <select class="form-control">
-                                    <option data-display="1 Adult">1 Adult</option>
-                                    <option value="1 Adult">1 Adult</option>
+                                    <option value="1 Adult" data-display="1 Adult">1 Adult</option>
+                                    <option value="2 Adults">2 Adults</option>
                                     <option value="3 Adults">3 Adults</option>
                                     <option value="4 Adults">4 Adults</option>
                                     <option value="5 Adults">5 Adults</option>
@@ -125,10 +122,8 @@
                                 <select class="form-control">
                                     <option data-display="0 Children">0 Children</option>
                                     <option value="0 Children">0 Children</option>
+                                    <option value="1 Children">1 Children</option>
                                     <option value="2 Childrens">2 Childrens</option>
-                                    <option value="3 Childrens">3 Childrens</option>
-                                    <option value="4 Childrens">4 Childrens</option>
-                                    <option value="5 Childrens">5 Childrens</option>
                                 </select>
                             </div>
                           

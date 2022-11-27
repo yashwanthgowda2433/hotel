@@ -1,6 +1,12 @@
 <section class="section-padding" style="padding-top:40px">
     <div class="auto-container">
         <div class="row">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-3"></div>
+
+            </div>
             <div class="containerss">
                 <div class="feature">
                     <figure class="featured-item image-holder r-3-2 transition"></figure>
@@ -43,6 +49,66 @@
                                             <div class="input-group form-group"> <span class="input-group-addon"> <i class="far fa-calendar-alt"></i> </span> <input placeholder="21 Sep, 2022" class="form-control" type="text" name="form-name" id="nd_booking_archive_form_date_range_to" value="" /> </div> <!-- <div class="form-group"><p class="hotel-booking-form-1-label text-lg-center">DEPARTURE:</p><input placeholder="21 Sep, 2022" class="" type="text" name="form-name" id="nd_booking_archive_form_date_range_to" value="" /></div> -->
                                         </div>
                                     </div>
+                                    
+                                    <input type="hidden" name="addRowArr" id="addRowArr" value="0"/>
+                                    <div class="row" id="appendRow">
+                                        <div class="row-2" id="appendRowArr0">
+                                            <div class="col-lg-3 col-md-3">
+                                                <div class="form-group">
+                                                    <p class="hotel-booking-form-1-label text-lg-center">Rooms:</p>
+                                                    <div class="input-group form-group"> 
+                                                        <span class="input-group-addon-2"> <i class="fas fa-bed"></i> </span> 
+                                                        <select class="form-control" name="room0">
+                                                            <option value="1" data-display="1 Room">1 Room</option>
+                                                            
+                                                        </select> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <div class="form-group">
+                                                    <p class="hotel-booking-form-1-label text-lg-center">Adults:</p>
+                                                    <div class="input-group form-group"> 
+                                                        <span class="input-group-addon-2"> <i class="fas fa-user-alt"></i> </span> 
+                                                        <select class="form-control" name="adult0">
+                                                            <?php 
+                                                            $val = $roomRecords->no_of_adults;
+                                                            for($i=1;$i<=$val;$i++){
+                                                                if($i==1){
+                                                                    echo '<option value="'.$i.' Adult" data-display="'.$i.' Adult">'.$i.' Adult</option>';
+                                                                }else{
+                                                                    echo '<option value="'.$i.' Adults">'.$i.' Adults</option>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                            
+                                                        </select> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <div class="form-group">
+                                                    <p class="hotel-booking-form-1-label text-lg-center">Child:</p>
+                                                    <div class="input-group form-group"> 
+                                                        <span class="input-group-addon-2"> <i class="fas fa-child"></i> </span> 
+                                                        <select class="form-control childdropdown" onchange="setMyValue(this.value,0)" name="child0">
+                                                            <option value="0" data-display="0 Child">0 Child</option>
+
+                                                        <?php 
+                                                            $val = $roomRecords->no_of_childs;
+                                                            for($i=1;$i<=$val;$i++){
+                                                                if($i==1){
+                                                                    echo '<option value="'.$i.'">'.$i.' Child</option>';
+                                                                }else{
+                                                                    echo '<option value="'.$i.'">'.$i.' Childrens</option>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
                                     <div class="col-lg-12 col-md-12 mt-4">
                                         <div class="form-group" style="text-align: right;"> 
                                             <div onclick="addRow()" class="btn-1" style="padding: 7px 10px;cursor:pointer;">Add <span></span> </div> 
@@ -50,55 +116,40 @@
                                         
                                         </div>
                                     </div>
-                                    <input type="hidden" name="addRowArr" id="addRowArr" value="0"/>
-                                    <div class="row" id="appendRow">
+
+                                    <div class="row">
                                         <div class="row-2" id="appendRowArr0">
-                                            <div class="col-lg-4 col-md-4">
-                                                <div class="form-group">
-                                                    <p class="hotel-booking-form-1-label text-lg-center">Rooms:</p>
+
+                                            <div class="col-lg-6 col-md-6" style="width:max-content;">
+                                                <div class="form-group" style="width:max-content;">
+                                                    <p class="hotel-booking-form-1-label text-lg-center">SPECIAL CODES OR RATES</p>
                                                     <div class="input-group form-group"> 
-                                                        <span class="input-group-addon-2"> <i class="fas fa-bed"></i> </span> 
-                                                        <select class="form-control" name="room0">
-                                                            <option data-display="1 Room">1 Room</option>
-                                                            <option value="2 Rooms">2 Rooms</option>
-                                                            <option value="3 Rooms">3 Rooms</option>
-                                                            <option value="4 Rooms">4 Rooms</option>
-                                                            <option value="5 Rooms">5 Rooms</option>
-                                                        </select> </div>
+                                                    <span class="input-group-addon-2"> <i class="fas fa-tag"></i> </span> 
+                                                        <select class="form-control childdropdown" name="childage`">
+                                                            <option>None</option>
+                                                            <option value="">Promo Code</option>
+                                                            <option value="">Corporate Code</option>
+                                                            <option value="">Coupon Code</option>
+                                                            <option value="">Group Code</option>
+                                                            <option value="">Agent ID</option>
+                                                            
+                                                        </select> 
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <div class="form-group">
-                                                    <p class="hotel-booking-form-1-label text-lg-center">Adults:</p>
-                                                    <div class="input-group form-group"> 
-                                                        <span class="input-group-addon-2"> <i class="fas fa-user-alt"></i> </span> 
-                                                        <select class="form-control" name="adult0">
-                                                            <option data-display="1 Adult">1 Adult</option>
-                                                            <option value="1 Adult">1 Adult</option>
-                                                            <option value="3 Adults">3 Adults</option>
-                                                            <option value="4 Adults">4 Adults</option>
-                                                            <option value="5 Adults">5 Adults</option>
-                                                        </select> </div>
+                                          <div class="col-lg-6 col-md-6" style="width:max-content;">
+                                            <div class="form-group">
+                                                 <p class="hotel-booking-form-1-label text-lg-center"> &nbsp;</p>
+                                                 <div class="input-group form-group"> 
+                                                    <input type="text" class="form-group" name="promocode" placeholder="Enter Code"/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <div class="form-group">
-                                                    <p class="hotel-booking-form-1-label text-lg-center">Child:</p>
-                                                    <div class="input-group form-group"> 
-                                                        <span class="input-group-addon-2"> <i class="fas fa-child"></i> </span> 
-                                                        <select class="form-control" name="child0">
-                                                            <option data-display="0 Children">0 Children</option>
-                                                            <option value="0 Children">0 Children</option>
-                                                            <option value="2 Childrens">2 Childrens</option>
-                                                            <option value="3 Childrens">3 Childrens</option>
-                                                            <option value="4 Childrens">4 Childrens</option>
-                                                            <option value="5 Childrens">5 Childrens</option>
-                                                        </select> </div>
-                                                </div>
-                                            </div>
+
+                                          </div>
                                         </div>
-                                        
+
                                     </div>
+                                    
                                     <div class="col-lg-12 col-md-12 mt-4">
                                         <div class="form-group" style="text-align: center;"> <button type="submit" class="btn-1">Book Now <span></span> </button> </div>
                                     </div>
@@ -276,55 +327,68 @@
         var value = document.getElementById("addRowArr").value;
         value=parseInt(value)+1;
         // alert(value);
+        var newval = parseInt(value)+1;
         document.getElementById("appendRow").innerHTML +=
             `                           
+            
                                         <div class="row-2" id="appendRowArr`+value+`">
-                                            <div class="col-lg-4 col-md-4">
+                                            <div class="col-lg-3 col-md-3">
                                                 <div class="form-group">
                                                     <p class="hotel-booking-form-1-label text-lg-center">Rooms:</p>
                                                     <div class="input-group form-group"> 
                                                         <span class="input-group-addon-2"> <i class="fas fa-bed"></i> </span> 
                                                         <select class="form-control" name="room`+value+`">
-                                                            <option data-display="1 Room">1 Room</option>
-                                                            <option value="2 Rooms">2 Rooms</option>
-                                                            <option value="3 Rooms">3 Rooms</option>
-                                                            <option value="4 Rooms">4 Rooms</option>
-                                                            <option value="5 Rooms">5 Rooms</option>
+                                                            <option value="`+newval+`" data-display="`+newval+` Room">`+newval+` Room</option>
+                                                            
                                                         </select> </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
+                                            <div class="col-lg-3 col-md-3">
                                                 <div class="form-group">
                                                     <p class="hotel-booking-form-1-label text-lg-center">Adults:</p>
                                                     <div class="input-group form-group"> 
                                                         <span class="input-group-addon-2"> <i class="fas fa-user-alt"></i> </span> 
                                                         <select class="form-control" name="adult`+value+`">
-                                                            <option data-display="1 Adult">1 Adult</option>
-                                                            <option value="1 Adult">1 Adult</option>
-                                                            <option value="3 Adults">3 Adults</option>
-                                                            <option value="4 Adults">4 Adults</option>
-                                                            <option value="5 Adults">5 Adults</option>
+                                                        <?php 
+                                                            $val = $roomRecords->no_of_adults;
+                                                            for($i=1;$i<=$val;$i++){
+                                                                if($i==1){
+                                                                    echo '<option value="'.$i.' Adult" data-display="'.$i.' Adult">'.$i.' Adult</option>';
+                                                                }else{
+                                                                    echo '<option value="'.$i.' Adults">'.$i.' Adults</option>';
+                                                                }
+                                                            }
+                                                            ?>
                                                         </select> </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
+                                            <div class="col-lg-3 col-md-3">
                                                 <div class="form-group">
                                                     <p class="hotel-booking-form-1-label text-lg-center">Child:</p>
                                                     <div class="input-group form-group"> 
                                                         <span class="input-group-addon-2"> <i class="fas fa-child"></i> </span> 
-                                                        <select class="form-control" name="child`+value+`">
-                                                            <option data-display="0 Children">0 Children</option>
-                                                            <option value="0 Children">0 Children</option>
-                                                            <option value="2 Childrens">2 Childrens</option>
-                                                            <option value="3 Childrens">3 Childrens</option>
-                                                            <option value="4 Childrens">4 Childrens</option>
-                                                            <option value="5 Childrens">5 Childrens</option>
-                                                        </select> </div>
+                                                        <select class="form-control childdropdown" onchange="setMyValue(this.value,`+value+`)" name="child`+value+`">
+                                                            <option value="0">0 Child</option>
+                                                        <?php 
+                                                            $val = $roomRecords->no_of_childs;
+                                                            for($i=1;$i<=$val;$i++){
+                                                                if($i==1){
+                                                                    echo '<option value="'.$i.'">'.$i.' Child</option>';
+                                                                }else{
+                                                                    echo '<option value="'.$i.'">'.$i.' Childrens</option>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                            
+                                                        </select> 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
             `;
             document.getElementById("addRowArr").value = value;
+	        $('select').niceSelect();
+
     }
 
     // AddRow End
@@ -337,6 +401,52 @@
         value=value-1;
         document.getElementById("addRowArr").value = value;
         }
+
+    }
+
+    function setMyValue(select, val){
+        var select_val = parseInt(select);
+        var elements = document.getElementById("appendRowArr"+val).children
+        var count = elements.length;
+        console.log(elements.length);
+        if(count == 4 || select_val==0){
+            let parent = document.getElementById("appendRowArr"+val);
+            // while (parent.hasChildNodes())
+            // {
+               parent.removeChild(parent.lastChild)
+            // }
+        }
+        var output = `<div class="col-lg-3 col-md-3">
+                                        <div class="row">`;
+        if(select_val > 0){
+            for(var i=1; i<=select_val; i++){
+                output += `
+                                    
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-group">
+                                                    <p class="hotel-booking-form-1-label text-lg-center">Child `+i+` Age:</p>
+                                                    <div class="input-group form-group"> 
+                                                        <select class="form-control childdropdown" name="childage`+val+`_`+i+`">
+                                                            <option>Age</option>
+                                                            <?php 
+                                                            $val = 12;
+                                                            for($i=1;$i<=$val;$i++){
+                                                                
+                                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                                
+                                                            }
+                                                            ?>
+                                                            
+                                                        </select> 
+                                                    </div>
+                                                </div>
+                                            </div>
+            `;
+            }
+        }
+        output += '</div></div>';
+        document.getElementById("appendRowArr"+val).innerHTML += output;
+        $('select').niceSelect();
 
     }
     // DeleteRow End
