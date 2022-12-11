@@ -53,6 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['index'] = 'welcome/index';
 $route['rooms'] = 'welcome/rooms';
 $route['rooms/(:num)'] = 'welcome/rooms/$1';
+$route['form_submit/(:num)'] = 'welcome/form_submit/$1';
+$route['room_booking'] = 'welcome/room_booking';
+$route['cancel/(:any)'] = 'welcome/cancel/$1';
+$route['confrim_cancel/(:any)'] = 'welcome/confrim_cancel/$1';
+
+
 
 $route['contact'] = 'welcome/contact';
 $route['room-details/(:num)'] = 'welcome/room_details/$1';

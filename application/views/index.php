@@ -66,7 +66,7 @@
                             <p class="hotel-booking-form-1-label text-lg-center">ARRIVAL:</p>
                             <div class="input-group form-group">
                                 <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
-                                <input placeholder="17 Sep, 2022" class="form-control" type="text" name="form-name" id="nd_booking_archive_form_date_range_from" value="">
+                                <input placeholder="17 Sep, 2022" class="form-control" type="text" name="arrival" id="nd_booking_archive_form_date_range_from" value="">
                             </div>
                             <!-- <div class="form-group">
                                 <input placeholder="17 Sep, 2022" class="" type="text" name="form-name" id="nd_booking_archive_form_date_range_from" value="" />
@@ -76,7 +76,7 @@
                             <p class="hotel-booking-form-1-label text-lg-center">DEPARTURE:</p>
                             <div class="input-group form-group">
                                 <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
-                                <input placeholder="21 Sep, 2022" class="form-control" type="text" name="form-name" id="nd_booking_archive_form_date_range_to" value="" />
+                                <input placeholder="21 Sep, 2022" class="form-control" type="text" name="departure" id="nd_booking_archive_form_date_range_to" value="" />
                             </div>
                             <!-- <div class="form-group">        
                                 <p class="hotel-booking-form-1-label text-lg-center">DEPARTURE:</p>
@@ -103,12 +103,12 @@
                           <p class="hotel-booking-form-1-label text-lg-center">Adults:</p>
                             <div class="input-group form-group">
                                 <span class="input-group-addon-2"><i class="fas fa-user-alt"></i></span>
-                                <select class="form-control">
-                                    <option value="1 Adult" data-display="1 Adult">1 Adult</option>
-                                    <option value="2 Adults">2 Adults</option>
-                                    <option value="3 Adults">3 Adults</option>
-                                    <option value="4 Adults">4 Adults</option>
-                                    <option value="5 Adults">5 Adults</option>
+                                <select class="form-control" name="no_of_adults">
+                                    <option value="1" data-display="1 Adult">1 Adult</option>
+                                    <option value="2">2 Adults</option>
+                                    <option value="3">3 Adults</option>
+                                    <option value="4">4 Adults</option>
+                                    <option value="5">5 Adults</option>
                                 </select>
                             </div>
                          
@@ -119,11 +119,10 @@
                           <p class="hotel-booking-form-1-label text-lg-center">Child:</p>
                           <div class="input-group form-group">
                                 <span class="input-group-addon-2"><i class="fas fa-child"></i></span>
-                                <select class="form-control">
-                                    <option data-display="0 Children">0 Children</option>
-                                    <option value="0 Children">0 Children</option>
-                                    <option value="1 Children">1 Children</option>
-                                    <option value="2 Childrens">2 Childrens</option>
+                                <select class="form-control" name="no_of_childs">
+                                    <option value="0">0 Children</option>
+                                    <option value="1">1 Children</option>
+                                    <option value="2">2 Childrens</option>
                                 </select>
                             </div>
                           

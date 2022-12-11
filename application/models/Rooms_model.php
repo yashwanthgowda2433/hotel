@@ -16,6 +16,17 @@ class Rooms_model extends CI_Model
      */
     function roomListingCount($searchText, $searchFloorId, $searchRoomSizeId)
     {
+        $this->params = $this->input->post();
+        if(!empty($this->params['no_of_adults']))
+        {
+            $this->db->where('BaseTbl.no_of_adults',$this->params['no_of_adults']);
+        }
+        if(!empty($this->params['no_of_childs']))
+        {
+            $this->db->where('BaseTbl.no_of_childs',$this->params['no_of_childs']);
+        }
+        
+        
         $this->db->select('BaseTbl.roomId, BaseTbl.roomNumber, BaseTbl.roomSizeId, RS.sizeTitle, RS.sizeDescription, RS.sizeId,
         					BaseTbl.floorId, FR.floorName, FR.floorCode, RBF.*');
         $this->db->from('ldg_rooms AS BaseTbl');
@@ -47,8 +58,24 @@ class Rooms_model extends CI_Model
      */
     function roomListing($searchText, $searchFloorId, $searchRoomSizeId, $roomId, $page, $segment)
     {
+        $this->params = $this->input->post();
+        if(!empty($this->params['no_of_adults']))
+        {
+            $this->db->where('BaseTbl.no_of_adults <=',$this->params['no_of_adults']);
+        }
+        if(!empty($this->params['no_of_childs']))
+        {
+            $this->db->where('BaseTbl.no_of_childs <=',$this->params['no_of_childs']);
+        }
+        // if(!empty($this->params['arrival']) && !empty($this->params['departure']))
+        // {
+        //     $arrival = $this->params['arrival'];
+        //     $departure = $this->params['departure'];
+        //     $this->db->where('BaseTbl.no_of_rooms <=',('select count(`bookingId`) from `ldg_bookings` join '));
+        // }
+        // print_r($this->params);die;
         $this->db->select('BaseTbl.roomId, BaseTbl.roomNumber, BaseTbl.roomSizeId, BaseTbl.images, BaseTbl.no_of_adults, BaseTbl.no_of_childs, RS.sizeTitle, RS.sizeDescription,
-        					BaseTbl.floorId, FR.floorName, FR.floorCode, RBF.*');
+        					BaseTbl.floorId, FR.floorName, FR.floorCode, RBF.*, BaseTbl.no_of_rooms');
         $this->db->from('ldg_rooms AS BaseTbl');
         $this->db->join('ldg_room_sizes AS RS', 'RS.sizeId = BaseTbl.roomSizeId');
         $this->db->join('ldg_floor AS FR', 'FR.floorId = BaseTbl.floorId');

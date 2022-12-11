@@ -85,6 +85,7 @@ $selected = "selected='selected'";
                       <th>Room Size</th>
                       <th>Room Description</th>
                       <th>Room Floor</th>
+                      <th>No. of Rooms</th>
                       <th>Images</th>
                       <th>Adults</th>
                       <th>Childs</th>
@@ -103,6 +104,8 @@ $selected = "selected='selected'";
                       <td><?php echo $record->sizeTitle ?></td>
                       <td><?php echo $record->sizeDescription ?></td>
                       <td><?php echo $record->floorCode." - ".$record->floorName; ?></td>
+                      <td><?php echo $record->no_of_rooms ?></td>
+
                       <td><div class="row" style="display: flex;flex-wrap: wrap;">
                         <?php 
                           $imgarr = json_decode($record->images);

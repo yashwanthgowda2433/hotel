@@ -116,6 +116,7 @@ class Rooms extends BaseController
                 $roomNumber = $this->security->xss_clean($this->input->post('roomNumber'));
                 $adults = $this->security->xss_clean($this->input->post('no_of_adults'));
                 $childs = $this->security->xss_clean($this->input->post('no_of_childs'));
+                $no_of_rooms = $this->security->xss_clean($this->input->post('no_of_rooms'));
 
                 $datetime = strtotime(date('Y-m-d H:i:s'));
                 $allowed_mime_type_arr = array('image/gif','image/jpeg','image/png','image/jpg','image/JPEG', 'image/JPG', 'image/PNG');
@@ -147,8 +148,7 @@ class Rooms extends BaseController
                     }
                 }
                 
-                $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber, 'images'=>json_encode($img_arr),
-                	'no_of_adults'=>$adults,'no_of_childs'=>$childs,'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
+                $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber, 'images'=>json_encode($img_arr),'no_of_rooms'=>$no_of_rooms, 'no_of_adults'=>$adults,'no_of_childs'=>$childs,'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
                 
                 $result = $this->rooms_model->addedNewRoom($roomInfo);
                 
@@ -256,6 +256,7 @@ class Rooms extends BaseController
                 $roomNumber = $this->security->xss_clean($this->input->post('roomNumber'));
                 $adults = $this->security->xss_clean($this->input->post('no_of_adults'));
                 $childs = $this->security->xss_clean($this->input->post('no_of_childs'));
+                $no_of_rooms = $this->security->xss_clean($this->input->post('no_of_rooms'));
 
                 $imgarray = json_decode($this->input->post('imgarr'));
                 
@@ -295,13 +296,13 @@ class Rooms extends BaseController
                         // for($i=0;$i<count($imgarray);$i++){
                         //     unlink($imgarray[$i]);
                         // }
-                        $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber, 'images'=>json_encode($img_arr), 'no_of_adults'=>$adults,'no_of_childs'=>$childs,'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
+                        $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber, 'images'=>json_encode($img_arr), 'no_of_rooms'=>$no_of_rooms, 'no_of_adults'=>$adults,'no_of_childs'=>$childs,'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
                     }else{
-                        $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber,'no_of_adults'=>$adults,'no_of_childs'=>$childs,'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
+                        $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber,'no_of_adults'=>$adults, 'no_of_rooms'=>$no_of_rooms, 'no_of_childs'=>$childs,'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
                     }
                     
                 }else{
-                    $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber,'no_of_adults'=>$adults,'no_of_childs'=>$childs,
+                    $roomInfo = array('floorId'=>$floorId, 'roomSizeId'=>$sizeId, 'roomNumber'=>$roomNumber,'no_of_adults'=>$adults,'no_of_childs'=>$childs, 'no_of_rooms'=>$no_of_rooms,
                     'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:sa'));
                 }
                 

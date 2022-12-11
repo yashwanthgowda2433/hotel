@@ -9,6 +9,89 @@
  */
 class Booking_model extends CI_Model
 {
+    function addNewBooking($params=[])
+    {
+        $id = $this->generate_apiaccesskey();
+        // if(!empty($params['bookingId']))
+        // {
+            $this->db->set('bookingId',$id);
+        // }
+        if(!empty($params['roomId']))
+        {
+            $this->db->set('roomId',$params['roomId']);
+        }
+        if(!empty($params['floorId']))
+        {
+            $this->db->set('floorId',$params['floorId']);
+        }
+        if(!empty($params['roomSizeId']))
+        {
+            $this->db->set('roomSizeId',$params['roomSizeId']);
+        }
+        if(!empty($params['arrival']))
+        {
+            $this->db->set('bookStartDate',$params['arrival']);
+        }
+        if(!empty($params['departure']))
+        {
+            $this->db->set('bookEndDate',$params['departure']);
+        }
+        if(!empty($params['roomId']))
+        {
+            $this->db->set('roomId',$params['roomId']);
+        }
+        if(!empty($params['customerId']))
+        {
+            $this->db->set('customerId',$params['customerId']);
+        }
+        $this->db->insert('ldg_bookings');
+        // echo $this->db->last_query();exit;
+        if($this->db->affected_rows()>0)
+        {
+            return $id;
+        }else{
+            return False;
+        }
+
+    }
+
+    /**
+	* Function to generate api access key for API access
+	* @return string
+	**/
+	public function generate_apiaccesskey()
+	{
+		$date = new DateTime();
+		$mobileaccess_key = sha1($date->getTimestamp());
+		
+		$this->db->where('	bookingId',$mobileaccess_key);
+		$query = $this->db->get('ldg_bookings');
+		$result = $query->num_rows();
+
+		if(!empty($result) && $result > 0)
+		{
+			return $this->generate_apiaccesskey();
+		}
+
+		return $mobileaccess_key;
+	}
+
+    public function cancel($params=[])
+    {
+        if(!empty($params['id']))
+        {
+            $this->db->set('status',0);
+            $this->db->where('bookingId',$params['id']);
+            $this->db->update('ldg_bookings');
+            if($this->db->affected_rows()>0)
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
     function bookingCount($searchText, $searchRoomId, $searchFloorId, $searchRoomSizeId, $customerName, $mobileNumber)
     {
         $this->db->select('BaseTbl.bookingId, BaseTbl.customerId, BaseTbl.bookingDtm, BaseTbl.roomId,
@@ -48,7 +131,7 @@ class Booking_model extends CI_Model
                             BaseTbl.bookStartDate, BaseTbl.bookEndDate, BaseTbl.bookingComments,
                             C.customerName, C.customerPhone, C.customerEmail,
                             R.roomNumber, R.roomSizeId, R.floorId, RS.sizeTitle, RS.sizeDescription,
-                            F.floorName, F.floorCode, BaseTbl.status');
+                            F.floorName, F.floorCode');
         $this->db->from('ldg_bookings AS BaseTbl');
         $this->db->join('ldg_customer AS C', 'BaseTbl.customerId = C.customerId');
         $this->db->join('ldg_rooms AS R', 'BaseTbl.roomId = R.roomId');
@@ -207,5 +290,18 @@ class Booking_model extends CI_Model
         $this->db->update('ldg_bookings', $bookingInfo);
         
         return $this->db->affected_rows();
+    }
+
+
+    function checkRoomisBooked($params=[])
+    {
+        if(!empty($params['arrival']) && !empty($params['departure']) && !empty($params['roomId']))
+        {
+            $data = $this->db->query('select count(`ldg`.`bookingId`) as `counts` from `ldg_bookings` as `ldg` join `ldg_booked_rooms` as `ldg_book` ON `ldg`.`bookingId` =`ldg_book`.`ldg_booked_bookingid` WHERE (`ldg`.`bookStartDate`>="'.$params['arrival'].'" and `ldg`.`bookEndDate`<="'.$params['departure'].'") and `ldg_book`.`ldg_booked_roomid`='.$params['roomId'].'')->row();
+
+            return $data->counts;
+        }else{
+            return 0;
+        }
     }
 }

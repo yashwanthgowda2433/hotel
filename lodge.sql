@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2022 at 05:00 PM
+-- Generation Time: Dec 11, 2022 at 11:15 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -23,23 +23,61 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ldg_booked_rooms`
+--
+
+CREATE TABLE `ldg_booked_rooms` (
+  `ldg_booked_id` int(20) NOT NULL,
+  `ldg_booked_roomid` int(18) NOT NULL,
+  `ldg_booked_roomno` int(20) NOT NULL,
+  `ldg_booked_customerid` int(18) NOT NULL,
+  `ldg_booked_bookingid` text NOT NULL,
+  `ldg_booked_no_of_adults` varchar(50) NOT NULL,
+  `ldg_booked_no_of_childs` varchar(50) NOT NULL,
+  `ldg_booked_child_1age` varchar(50) NOT NULL,
+  `ldg_booked_child_2age` varchar(50) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ldg_booked_rooms`
+--
+
+INSERT INTO `ldg_booked_rooms` (`ldg_booked_id`, `ldg_booked_roomid`, `ldg_booked_roomno`, `ldg_booked_customerid`, `ldg_booked_bookingid`, `ldg_booked_no_of_adults`, `ldg_booked_no_of_childs`, `ldg_booked_child_1age`, `ldg_booked_child_2age`, `createdAt`) VALUES
+(1, 7, 1, 1, 'cad79d8683754fd8c3643d9d7df06f95882903a1', '1 Adult', '', '', '', '2022-12-11 14:55:19'),
+(2, 7, 2, 1, 'cad79d8683754fd8c3643d9d7df06f95882903a1', '1 Adult', '', '', '', '2022-12-11 14:55:20');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ldg_bookings`
 --
 
 CREATE TABLE `ldg_bookings` (
-  `bookingId` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `bookingId` text NOT NULL,
   `customerId` int(11) NOT NULL,
-  `bookingDtm` datetime NOT NULL,
+  `floorId` int(11) NOT NULL,
+  `roomSizeId` int(11) NOT NULL,
+  `bookingDtm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `roomId` int(11) NOT NULL,
   `bookStartDate` datetime NOT NULL,
   `bookEndDate` datetime NOT NULL,
   `bookingComments` varchar(2048) DEFAULT NULL,
   `isDeleted` tinyint(4) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
   `createdBy` int(11) NOT NULL,
-  `createdDtm` datetime NOT NULL,
+  `createdDtm` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedBy` int(11) DEFAULT NULL,
   `updatedDtm` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ldg_bookings`
+--
+
+INSERT INTO `ldg_bookings` (`id`, `bookingId`, `customerId`, `floorId`, `roomSizeId`, `bookingDtm`, `roomId`, `bookStartDate`, `bookEndDate`, `bookingComments`, `isDeleted`, `status`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
+(1, 'cad79d8683754fd8c3643d9d7df06f95882903a1', 1, 2, 3, '2022-12-11 14:55:19', 7, '2022-12-11 00:00:00', '2022-12-12 00:00:00', NULL, 0, 1, 0, '2022-12-11 14:55:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -65,8 +103,7 @@ CREATE TABLE `ldg_customer` (
 --
 
 INSERT INTO `ldg_customer` (`customerId`, `customerName`, `customerAddress`, `customerPhone`, `customerEmail`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
-(1, 'Sachin', 'The Big Street Address, Near Corner', '123456789', '', 0, 1, '2017-08-02 18:25:01', 1, '2018-12-30 06:47:31'),
-(2, 'Yashwanth', 'The Big Street Address, Near Corner', '', 'email@outlook.com', 0, 1, '2017-08-02 18:35:04', 1, '2018-12-30 06:48:04');
+(1, 'Yashwanth gowda', NULL, '8550812238', 'yashwanthgowda2433@gmail.com', 0, 0, '0000-00-00 00:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,6 +211,7 @@ CREATE TABLE `ldg_rooms` (
   `roomSizeId` int(11) NOT NULL COMMENT 'FK : ldg_room_sizes',
   `floorId` tinyint(4) NOT NULL COMMENT 'FK : ldg_floor',
   `images` text NOT NULL,
+  `no_of_rooms` int(11) NOT NULL DEFAULT '1',
   `no_of_adults` int(10) NOT NULL,
   `no_of_childs` int(10) NOT NULL,
   `isDeleted` tinyint(4) NOT NULL DEFAULT '0',
@@ -187,14 +225,14 @@ CREATE TABLE `ldg_rooms` (
 -- Dumping data for table `ldg_rooms`
 --
 
-INSERT INTO `ldg_rooms` (`roomId`, `roomNumber`, `roomSizeId`, `floorId`, `images`, `no_of_adults`, `no_of_childs`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
-(1, 'G101', 1, 1, '[\"images\\/1668701796\\/WhatsApp Image 2022-10-21 at 1.15.59 PM.jpeg\",\"images\\/1668701796\\/WhatsApp Image 2022-10-21 at 1.10.34 PM.jpeg\"]', 2, 1, 1, 1, '2022-11-18 05:34:47', 1, '2022-11-20 04:18:12'),
-(2, 'G102', 1, 1, '[\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.15.59 PM.jpeg\",\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.10.34 PM.jpeg\",\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.10.21 PM.jpeg\",\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.10.08 PM.jpeg\"]', 2, 0, 1, 1, '2022-11-18 12:21:06', 1, '2022-11-20 04:18:09'),
-(3, 'G103', 1, 1, '[\"images\\/1668745972\\/WhatsApp Image 2022-10-21 at 1.10.21 PM.jpeg\",\"images\\/1668745972\\/WhatsApp Image 2022-10-21 at 1.10.08 PM.jpeg\"]', 2, 1, 1, 1, '2022-11-18 05:33:35', 1, '2022-11-20 04:18:05'),
-(4, 'G101', 1, 1, '[\"images\\/1668914405\\/room-1.jpg\",\"images\\/1668914405\\/room-2.jpg\",\"images\\/1668914405\\/room-3.jpg\"]', 2, 0, 0, 1, '2022-11-20 04:20:05', NULL, NULL),
-(5, 'G102', 2, 1, '[\"images\\/1668914458\\/room-7.jpg\",\"images\\/1668914458\\/room-8.jpg\"]', 2, 1, 0, 1, '2022-11-20 04:20:58', NULL, NULL),
-(6, 'G103', 3, 1, '[\"images\\/1668914555\\/room-9.jpg\",\"images\\/1668914555\\/room-10.jpg\",\"images\\/1668914555\\/room-11.jpg\"]', 4, 3, 0, 1, '2022-11-20 04:22:35', NULL, NULL),
-(7, 'F101', 3, 2, '[\"images\\/1668916454\\/room-14.jpg\",\"images\\/1668916454\\/room-16.jpg\"]', 2, 2, 0, 1, '2022-11-20 04:54:14', NULL, NULL);
+INSERT INTO `ldg_rooms` (`roomId`, `roomNumber`, `roomSizeId`, `floorId`, `images`, `no_of_rooms`, `no_of_adults`, `no_of_childs`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
+(1, 'G101', 1, 1, '[\"images\\/1668701796\\/WhatsApp Image 2022-10-21 at 1.15.59 PM.jpeg\",\"images\\/1668701796\\/WhatsApp Image 2022-10-21 at 1.10.34 PM.jpeg\"]', 1, 1, 1, 0, 1, '2022-11-18 05:34:47', 1, '2022-11-20 04:18:12'),
+(2, 'G102', 1, 1, '[\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.15.59 PM.jpeg\",\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.10.34 PM.jpeg\",\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.10.21 PM.jpeg\",\"images\\/1668770466\\/WhatsApp Image 2022-10-21 at 1.10.08 PM.jpeg\"]', 1, 2, 0, 1, 1, '2022-11-18 12:21:06', 1, '2022-11-20 04:18:09'),
+(3, 'G103', 1, 1, '[\"images\\/1668745972\\/WhatsApp Image 2022-10-21 at 1.10.21 PM.jpeg\",\"images\\/1668745972\\/WhatsApp Image 2022-10-21 at 1.10.08 PM.jpeg\"]', 1, 2, 1, 1, 1, '2022-11-18 05:33:35', 1, '2022-11-20 04:18:05'),
+(4, 'G101', 1, 1, '[\"images\\/1668914405\\/room-1.jpg\",\"images\\/1668914405\\/room-2.jpg\",\"images\\/1668914405\\/room-3.jpg\"]', 1, 2, 0, 0, 1, '2022-11-20 04:20:05', NULL, NULL),
+(5, 'G102', 2, 1, '[\"images\\/1668914458\\/room-7.jpg\",\"images\\/1668914458\\/room-8.jpg\"]', 3, 2, 1, 0, 1, '2022-11-20 04:20:58', NULL, NULL),
+(6, 'G103', 3, 1, '[\"images\\/1668914555\\/room-9.jpg\",\"images\\/1668914555\\/room-10.jpg\",\"images\\/1668914555\\/room-11.jpg\"]', 3, 2, 3, 0, 1, '2022-11-20 04:22:35', NULL, NULL),
+(7, 'F101', 3, 2, '[\"images\\/1668916454\\/room-14.jpg\",\"images\\/1668916454\\/room-16.jpg\"]', 2, 3, 2, 0, 1, '2022-12-08 07:32:20', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -292,10 +330,18 @@ INSERT INTO `ldg_users` (`userId`, `userEmail`, `userPassword`, `userName`, `use
 --
 
 --
+-- Indexes for table `ldg_booked_rooms`
+--
+ALTER TABLE `ldg_booked_rooms`
+  ADD PRIMARY KEY (`ldg_booked_id`),
+  ADD KEY `ldg_booked_customerid` (`ldg_booked_customerid`),
+  ADD KEY `ldg_booked_roomid` (`ldg_booked_roomid`);
+
+--
 -- Indexes for table `ldg_bookings`
 --
 ALTER TABLE `ldg_bookings`
-  ADD PRIMARY KEY (`bookingId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ldg_customer`
@@ -357,15 +403,20 @@ ALTER TABLE `ldg_users`
 --
 
 --
+-- AUTO_INCREMENT for table `ldg_booked_rooms`
+--
+ALTER TABLE `ldg_booked_rooms`
+  MODIFY `ldg_booked_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `ldg_bookings`
 --
 ALTER TABLE `ldg_bookings`
-  MODIFY `bookingId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ldg_customer`
 --
 ALTER TABLE `ldg_customer`
-  MODIFY `customerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `customerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ldg_floor`
 --

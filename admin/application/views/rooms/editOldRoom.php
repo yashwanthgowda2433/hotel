@@ -11,6 +11,8 @@ if(!empty($roomInfo))
     foreach ($roomInfo as $info)
     {
         $roomId = $info->roomId;
+        $no_of_rooms = $info->no_of_rooms;
+
         $floorId = $info->floorId;
         $roomSizeId = $info->roomSizeId;
         $roomNumber = $info->roomNumber;
@@ -103,8 +105,11 @@ if(!empty($roomInfo))
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    
-                                </div>    
+                                    <div class="form-group">
+                                        <label for="mobile">Number of Rooms</label>
+                                        <input type="number" class="form-control" id="no_of_rooms" name="no_of_rooms"  value="<?php echo $no_of_rooms; ?>" maxlength="10">
+                                    </div>
+                                </div> 
                             </div>
 
                             <div class="row">

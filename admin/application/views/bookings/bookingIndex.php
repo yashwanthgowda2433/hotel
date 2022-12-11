@@ -124,6 +124,7 @@ $selected = "selected='selected'";
                         <th>Name</th>
                         <th>Details</th>
                         <th>Booking Date</th>
+                        <th>Status</th>
                         
                         <th class="text-center">Actions</th>
                     </tr>
@@ -141,6 +142,8 @@ $selected = "selected='selected'";
                         <td><?= $record->customerName ?><br><?= !empty($record->customerPhone)? $record->customerPhone."<br>" : ''; ?><?= $record->customerEmail ?></td>
                         <td><?= $record->bookingComments ?></td>
                         <td><?= $record->bookingDtm ?></td>
+                        <td><?= $record->status!=0 ? '<span style="color:green">Success</span>' : '<span style="color:red">Cancelled</span>' ?></td>
+
                         <td width="15%" class="text-center">
                           <a href="<?php echo base_url().'booking/editOldBooking/'.$record->bookingId; ?>" class="btn btn-sm btn-warning" title="Information"><i class="fa fa-info-circle"></i></a>
                           <a href="<?php echo base_url().'booking/editOldBooking/'.$record->bookingId; ?>" class="btn btn-sm btn-info" title="Edit"><i class="fa fa-pencil"></i></a>

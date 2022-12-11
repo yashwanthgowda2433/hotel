@@ -12,6 +12,14 @@
             {
                 foreach($roomRecords as $record)
                 {
+                    if(!empty($arrival) && !empty($departure)){
+                       $params['arrival'] = $arrival;
+                       $params['departure'] = $departure;
+                    }
+                    $params['roomId'] = $record->roomId;
+
+                    $count = $controller->checkRoomBookedCounts($params);
+                   if($record->no_of_rooms>$count){
             ?>
                 <div class="col-lg-4 col-md-6">
                     <div class="room-1-block wow fadeInUp" data-wow-delay=".2s" data-wow-duration=".8s">
@@ -32,11 +40,14 @@
                             </div> -->
                             <h4 class="room-1-title mb_20"><a href="<?php echo base_url('room-details/'.$record->roomId); ?>"><?php echo $record->sizeTitle ?></a></h4>
                             <p class="room-1-text mb_30"><?php echo $record->floorCode." - ".$record->floorName; ?>.</p>
+                            <p class="room-1-text mb_30">Availabile Rooms : <span style="color:green;"><?php echo $record->no_of_rooms; ?></span></p>
+
                             <div class="link-btn"><a href="<?php echo base_url('room-details/'.$record->roomId); ?>" class="btn-1 btn-alt">Book Now <span></span></a></div>
                         </div>
                     </div>
                 </div>
             <?php }
+            }
             } ?>
                 <!-- <div class="col-lg-4 col-md-6">
                     <div class="room-1-block wow fadeInUp" data-wow-delay=".2s" data-wow-duration="1.2s">

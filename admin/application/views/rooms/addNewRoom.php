@@ -73,6 +73,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="mobile">Number of Rooms</label>
+                                        <input type="number" class="form-control" id="no_of_rooms" name="no_of_rooms" maxlength="10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="mobile">Upload Images</label>
                                         <input type="file" class="form-control" id="file" name="file[]" accept="gif|jpg|png" multiple />
                                     </div>

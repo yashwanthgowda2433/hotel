@@ -243,7 +243,27 @@
 .move-btn:first-child {border-right: none;}
 .move-btn.left  { cursor: w-resize; }
 .move-btn.right { cursor: e-resize; }
-
+.form-check-input:checked {
+    background-color: #c77a63;
+    border-color: #c77a63;
+}
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 999999;
+}
+.modal {
+  background: rgba(0, 0, 0, 0.5); 
+}
+.modal-backdrop {
+  display: none;
+}
+@media(max-width:750px){
+    .row-2 {
+       display: flex;
+       flex-wrap: inherit;
+    }
+}
 </style>
 </head>
 

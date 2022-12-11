@@ -47,7 +47,7 @@ class Rooms_model extends CI_Model
     function roomListing($searchText, $searchFloorId, $searchRoomSizeId, $page, $segment)
     {
         $this->db->select('BaseTbl.roomId, BaseTbl.roomNumber, BaseTbl.roomSizeId, BaseTbl.images, BaseTbl.no_of_adults, BaseTbl.no_of_childs, RS.sizeTitle, RS.sizeDescription,
-        					BaseTbl.floorId, FR.floorName, FR.floorCode');
+        					BaseTbl.floorId, FR.floorName, FR.floorCode, BaseTbl.no_of_rooms');
         $this->db->from('ldg_rooms AS BaseTbl');
         $this->db->join('ldg_room_sizes AS RS', 'RS.sizeId = BaseTbl.roomSizeId');
         $this->db->join('ldg_floor AS FR', 'FR.floorId = BaseTbl.floorId');
@@ -117,7 +117,7 @@ class Rooms_model extends CI_Model
      */
     function getRoomInfo($roomId)
     {
-        $this->db->select('roomId, roomNumber, roomSizeId, floorId, images, no_of_adults, no_of_childs');
+        $this->db->select('roomId, roomNumber, roomSizeId, floorId, images, no_of_adults, no_of_childs, no_of_rooms');
         $this->db->from('ldg_rooms');
         $this->db->where('isDeleted', 0);
         $this->db->where('roomId', $roomId);
